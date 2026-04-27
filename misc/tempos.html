@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Python for Tempo</title>
+</head>
+<body>
+
+<h1>Python for Tempo</h1>
+<p>Sonic Visualiser shows tempo manually</p>
+<p>Python can extract it programmatically</p>
+<p>We use `librosa` in Jupyter Notebook</p>
+<p>Loop through files, print results</p>
+
+<h1>Why Not Sonic Visualiser?</h1>
+<p>Sonic Visualiser shows tempo visually</p>
+<p>Manually checking each file takes too long</p>
+<p>Python extracts tempo for many files</p>
+<p>Useful for batch processing</p>
+
+<h1>Install and Import</h1>
+<p>First, install `librosa` if needed</p>
+<pre><code>!pip install librosa</code></pre>
+<p>Now, import necessary libraries</p>
+<pre><code>import librosa
+import os</code></pre>
+
+<h1>Load One Audio File</h1>
+<p>Load a single file using `librosa.load()`</p>
+<pre><code>file_path = "your_audio.wav"
+y, sr = librosa.load(file_path)
+print(f"Sample rate: {sr}")</code></pre>
+
+<h1>Extract One Tempo</h1>
+<p>Use `librosa.beat.beat_track()` to find tempo</p>
+<pre><code>def get_tempo(file_path):
+    y, sr = librosa.load(file_path)
+    tempo, _ = librosa.beat.beat_track(y=y, sr=sr)
+    return tempo</code></pre>
+
+<h1>Print One Tempo</h1>
+<p>Run the function and print the tempo</p>
+<pre><code>file_path = "your_audio.wav"
+tempo = get_tempo(file_path)
+print(f"Tempo: {tempo} BPM")</code></pre>
+
+<h1>Setup File Folder</h1>
+<p>Put all audio files in a folder</p>
+<p>Use `os` to list files</p>
+<pre><code>directory = "path/to/audio"
+files = os.listdir(directory)</code></pre>
+
+<h1>Filter Audio Files</h1>
+<p>Only get `.wav` or `.mp3` files</p>
+<pre><code>audio_files = [f for f in files
+    if f.endswith(".wav") or f.endswith(".mp3")]
+print(audio_files)</code></pre>
+
+<h1>Extract Many Tempos</h1>
+<p>Loop through all audio files</p>
+<pre><code>tempos = []
+for file in audio_files:
+    file_path = os.path.join(directory, file)
+    tempo = get_tempo(file_path)
+    tempos.append((file, tempo))</code></pre>
+
+<h1>Print All Tempos</h1>
+<p>Show filenames and their tempos</p>
+<pre><code>for file, tempo in tempos:
+    print(f"{file}: {tempo} BPM")</code></pre>
+
+<h1>Handle Errors</h1>
+<p>Use `try-except` to avoid errors</p>
+<pre><code>for file in audio_files:
+    try:
+        tempo = get_tempo(os.path.join(directory, file))
+        tempos.append((file, tempo))
+    except:
+        print(f"Error processing {file}")</code></pre>
+
+<h1>Sort Tempo List</h1>
+<p>Sort tempos from slowest to fastest</p>
+<pre><code>tempos.sort(key=lambda x: x[1])
+print("Sorted Tempos:", tempos)</code></pre>
+
+<h1>Find Min & Max</h1>
+<p>Print slowest and fastest tempos</p>
+<pre><code>print(f"Slowest Tempo: {tempos[0]} BPM")
+print(f"Fastest Tempo: {tempos[-1]} BPM")</code></pre>
+
+<h1>Using Tempo Data</h1>
+<p>Sort tempos to categorize songs</p>
+<p>Great for DJs, producers, researchers</p>
+<p>Find outliers or tempo shifts</p>
+<p>Compare genres by tempo range</p>
+
+<h1>Automate Processing</h1>
+<p>Run script on hundreds of files</p>
+<p>Use Google Colab for cloud execution</p>
+<p>Store results in a text file</p>
+<p>Automate periodic analysis</p>
+
+<h1>Final Thoughts</h1>
+<p>Sonic Visualiser is good for manual checking</p>
+<p>Python is fast, automated, and scalable</p>
+<p>Looping through folders saves time</p>
+<p>Sorted tempos are useful for analysis</p>
+
+</body>
+</html>
