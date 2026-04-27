@@ -5,14 +5,14 @@ A tone-tune mapping audit comparing human-sung Cantopop against Suno-generated C
 
 ## Question
 
-Cantonese is a tone language: pitch direction between adjacent syllables has to roughly match the lexical tonal direction, or the lyric becomes unintelligible. Wong & Diehl (2002) showed human Cantopop respects this rule **75–92%** of the time. **Does Suno?**
+Cantonese is a tonal language in which the pitch direction between adjacent syllables has to roughly match the lexical tonal direction, or the lyric becomes unintelligible. Wong & Diehl (2002) showed human Cantopop respects this rule **75–92%** of the time. **Does Suno?**
 
 ## Method
 
-1. **Citation tones** — for each lyric snippet, look up every character's tone (1–6) in Words.hk and reduce to a 3-level target (High / Mid / Low) following Wong & Diehl.
-2. **F0 extraction** — segment each audio snippet into syllables, then use [Parselmouth](https://parselmouth.readthedocs.io/) (Python wrapper for Praat) to extract the fundamental frequency per syllable.
-3. **Direction comparison** — for every adjacent syllable pair, compare *expected* tonal direction against *actual* F0 direction. Count violations.
-4. **Validate** — confirm the human songs land in Wong & Diehl's 75–92% band, then read off Suno's number against the same baseline.
+1. **Citation tones** : for each lyric snippet, look up every character's tone (1–6) in Words.hk and reduce to a 3-level target (High / Mid / Low) following Wong & Diehl.
+2. **F0 extraction** : segment each audio snippet into syllables, then use [Parselmouth](https://parselmouth.readthedocs.io/) (Python wrapper for Praat) to extract the fundamental frequency per syllable.
+3. **Direction comparison** : for every adjacent syllable pair, compare *expected* tonal direction against *actual* F0 direction. Count violations.
+4. **Validate** : confirm the human songs land in Wong & Diehl's 75–92% band, then read off Suno's number against the same baseline.
 
 ## Dataset
 
