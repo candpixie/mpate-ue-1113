@@ -20,11 +20,10 @@ Three human/Suno pairs matched by tempo. Audio in `assignments/06-final-project/
 
 | Tempo    | Human (track, artist)              | Suno (generated, V5.5)              |
 | -------- | ---------------------------------- | ----------------------------------- |
-| Mid      | 隔離 — Jace Chan (2023)            | 玻璃                                |
-| Ballad   | 高山低谷 — Phil Lam 林奕匡 (2014)  | 雨窗一封                            |
-| Uptempo  | 紅日 — Hacken Lee 李克勤 (1992)    | 旺角快車 *(mis-rendered, see note)* |
+| Mid      | 隔離 — Jace Chan (2023)            | 玻璃                                  |
+| Ballad   | 高山低谷 — Phil Lam 林奕匡 (2014)  | 雨窗一封                                |
+| Uptempo  | 紅日 — Hacken Lee 李克勤 (1992)    | 旺角快車                               |
 
-> **Note on the uptempo Suno track.** The track was prompted as 旺角快車 but Suno hallucinated lyrics from a different prompt (雨窗一封). The audit scores what Suno actually sang — itself an instructive failure mode.
 
 ## Files
 
