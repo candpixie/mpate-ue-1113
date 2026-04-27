@@ -1,4 +1,5 @@
-# Final Project — Does AI-Generated Cantopop Respect Cantonese Tone?
+# MPATE-UE-1113 Final Project — Does AI-Generated Cantopop Respect Cantonese Tone?
+by Candy Xie
 
 A tone-tune mapping audit comparing **human-sung Cantopop** against **Suno-generated Cantopop** to test whether AI music generation respects Cantonese's six-tone system.
 
