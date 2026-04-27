@@ -9,22 +9,22 @@ Cantonese is a tone language: pitch direction between adjacent syllables has to 
 
 ## Method
 
-1. **Citation tones** — for each lyric snippet, look up every character's tone (1–6) in Words.hk and reduce to a 3-level target (High / Mid / Low) following Wong & Diehl.
-2. **F0 extraction** — segment each audio snippet into syllables, then use [Parselmouth](https://parselmouth.readthedocs.io/) (Python wrapper for Praat) to extract the fundamental frequency per syllable.
-3. **Direction comparison** — for every adjacent syllable pair, compare *expected* tonal direction against *actual* F0 direction. Count violations.
-4. **Validate** — confirm the human songs land in Wong & Diehl's 75–92% band, then read off Suno's number against the same baseline.
+1. **Citation tones** — pick one 7–14 syllable snippet per track (no 變調 sandhi, no English loanwords, no proper nouns). Hand-annotate each character's Cantonese tone (1–6) and reduce to a 3-level target (High / Mid / Low) following Wong & Diehl's tone-ending mapping.
+2. **F0 extraction** — auto-segment the snippet into syllables (voiced-region detection on Parselmouth's pitch contour), then use [Parselmouth](https://parselmouth.readthedocs.io/) (Python wrapper for Praat) to compute the median F0 per syllable.
+3. **Direction comparison** — for every adjacent syllable pair, compare *expected* tonal direction (up/flat/down) against *actual* F0 direction. Count violations.
+4. **Validate** — confirm the human songs land in Wong & Diehl's 75–92% band; read off Suno's match rate against the same baseline.
 
 ## Dataset
 
-Three human/Suno pairs matched by tempo:
+Three human/Suno pairs matched by tempo. Audio in `assignments/06-final-project/audio/`.
 
-| Tempo    | Human (track)              | Suno (generated)        |
-| -------- | -------------------------- | ----------------------- |
-| Ballad   | 高山低谷 (Phil Lam)        | 玻璃                    |
-| Mid      | 隔離 (Jace Chan)           | 雨窗一封                |
-| Uptempo  | 紅日 (Hacken Lee)          | 旺角快車                |
+| Tempo    | Human (track, artist)              | Suno (generated, V5.5)              |
+| -------- | ---------------------------------- | ----------------------------------- |
+| Mid      | 隔離 — Jace Chan (2023)            | 玻璃                                |
+| Ballad   | 高山低谷 — Phil Lam 林奕匡 (2014)  | 雨窗一封                            |
+| Uptempo  | 紅日 — Hacken Lee 李克勤 (1992)    | 旺角快車 *(mis-rendered, see note)* |
 
-Audio in `assignments/05-project-2/audio/`.
+> **Note on the uptempo Suno track.** The track was prompted as 旺角快車 but Suno hallucinated lyrics from a different prompt (雨窗一封). The audit scores what Suno actually sang — itself an instructive failure mode.
 
 ## Files
 
@@ -36,15 +36,21 @@ Audio in `assignments/05-project-2/audio/`.
 ## Run
 
 ```bash
-pip install parselmouth librosa numpy matplotlib
-python assignments/06-final-project/audit_driver.py
+pip install praat-parselmouth librosa numpy pandas matplotlib
+cd assignments/06-final-project
+python audit_driver.py
 ```
 
-Output: `figures/human_vs_suno.png` plus a per-pair violation table to stdout.
+Outputs:
+- `figures/human_vs_suno.png` — bar chart of match rate per tempo bucket vs the Wong & Diehl baseline band
+- per-snippet expected-direction tables and pair-by-pair violation reports to stdout
+- top Suno violations grouped by track (b-roll material for the project video)
 
-## Findings (TL;DR)
+The CJK glyphs in matplotlib labels rely on a system CJK font (PingFang / Heiti / Hiragino — all preinstalled on macOS). On Linux, install `fonts-noto-cjk` and add `'Noto Sans CJK TC'` to `matplotlib.rcParams['font.family']` near the top of `audit_driver.py`.
 
-Human tracks fall inside the 75–92% baseline band, validating the method. Suno's match rate is meaningfully lower — gap is largest in uptempo where fast melodic motion overrides tonal targets. Concrete failures and discussion in the project video.
+## Findings
+
+See `figures/human_vs_suno.png` and the violation tables in the audit's stdout. Discussion and concrete failure pairs are walked through in the accompanying video.
 
 ---
 
