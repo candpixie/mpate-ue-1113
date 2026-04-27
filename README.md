@@ -1,4 +1,4 @@
-# MPATE-UE-1113 — Music Technology Coursework
+# MPATE-UE-1113 Coursework
 
 My personal work for NYU's *Music Technology* course (Spring 2026). Python-based audio analysis, music information retrieval, and clustering — built around `librosa`, `music21`, `numpy`, and `scikit-learn`.
 
