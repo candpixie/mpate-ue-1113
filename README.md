@@ -28,16 +28,16 @@ Audio in `assignments/05-project-2/audio/`.
 
 ## Files
 
-- `assignments/05-project-2/cantonese_tone_audit.py` — core framework: tone mapping, F0 extraction, violation counting
-- `assignments/05-project-2/audit_driver.py` — runs the audit across all 6 tracks, emits the comparison figure
-- `assignments/05-project-2/audio/` — 3 human + 3 Suno mp3s
-- `assignments/05-project-2/figures/human_vs_suno.png` — bar chart of match rate vs Wong & Diehl baseline
+- `assignments/06-final-project/cantonese_tone_audit.py` — core framework: tone mapping, F0 extraction, violation counting
+- `assignments/06-final-project/audit_driver.py` — runs the audit across all 6 tracks, emits the comparison figure
+- `assignments/06-final-project/audio/` — 3 human + 3 Suno mp3s
+- `assignments/06-final-project/figures/human_vs_suno.png` — bar chart of match rate vs Wong & Diehl baseline
 
 ## Run
 
 ```bash
 pip install parselmouth librosa numpy matplotlib
-python assignments/05-project-2/audit_driver.py
+python assignments/06-final-project/audit_driver.py
 ```
 
 Output: `figures/human_vs_suno.png` plus a per-pair violation table to stdout.
@@ -58,12 +58,13 @@ My personal work for NYU's *Music, Mind and Artificial Intelligence* course (Spr
   - `01-python-basics` · `02-hello` · `03-leap-year` — warm-ups
   - `04-sine-wave` · `05-sine-square-saw` · `06-play-audio` — synthesis & playback
   - `07-librosa-tempo` — tempo / beat tracking with librosa
-- **`assignments/`** — Five graded assignments
+- **`assignments/`** — Graded assignments
   - `01-written-1+2` — written responses
   - `02-librosa` — audio feature extraction
   - `03-clustering` — clustering songs by audio features
   - `04-playlisting` — playlist generation
   - `05-project-2` — project 2
+  - `06-final-project` — final project (Cantonese tone audit, see top of README)
 - **`demos/`** — Side explorations (drum clustering, music21 analysis)
 - **`notes/`** — Personal study notes (sine-wave fundamentals)
 - **`misc/`** — Tempo-extraction tutorial I wrote up while reviewing for an assignment
