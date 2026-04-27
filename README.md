@@ -13,7 +13,7 @@ My personal work for NYU's *Music, Mind and Artificial Intelligence* course (Spr
   - `02-librosa` — audio feature extraction
   - `03-clustering` — clustering songs by audio features
   - `04-playlisting` — playlist generation
-  - `05-project-2` — final project
+  - `05-project-2` — project 2
 - **`demos/`** — Side explorations (drum clustering, music21 analysis)
 - **`notes/`** — Personal study notes (sine-wave fundamentals)
 - **`misc/`** — Tempo-extraction tutorial I wrote up while reviewing for an assignment
