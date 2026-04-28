@@ -5,43 +5,46 @@ A tone-tune mapping audit comparing human-sung Cantopop against Suno-generated C
 
 ## Question
 
-Cantonese is a tonal language in which the pitch direction between adjacent syllables has to roughly match the lexical tonal direction, or the lyric becomes unintelligible. Wong & Diehl (2002) showed human Cantopop respects this rule **75–92%** of the time. **What about for Suno?**
+Cantonese is a tonal language: the pitch direction between adjacent syllables has to roughly match the lexical tonal direction, or the lyric becomes unintelligible — sing 係 (*hai6*, "is") with the pitch shape of 西 (*sai1*, vulgar) and a Cantonese listener hears a different word. Wong & Diehl (2002) showed human Cantopop respects this rule **75–92%** of the time. **Does Suno?**
 
 ## Method
 
-1. **Citation tones**: for each lyric snippet, look up every character's tone (1–6) in Words.hk and reduce to a 3-level target (High / Mid / Low) following Wong & Diehl.
-2. **F0 extraction**: segment each audio snippet into syllables, then use [Parselmouth](https://parselmouth.readthedocs.io/) (Python wrapper for Praat) to extract the fundamental frequency per syllable.
+1. **Citation tones**: for each chorus snippet, look up every character's tone (1–6) in Words.hk and reduce to a 3-level target (High / Mid / Low) following Wong & Diehl.
+2. **F0 extraction**: auto-segment each audio snippet into syllables, then use [Parselmouth](https://parselmouth.readthedocs.io/) (Python wrapper for Praat) to extract the fundamental frequency per syllable.
 3. **Direction comparison**: for every adjacent syllable pair, compare *expected* tonal direction against *actual* F0 direction. Count violations.
-4. **Validate**: confirm the human songs land in Wong & Diehl's 75–92% band, then read off Suno's number against the same baseline.
+4. **Pool comparison**: aggregate match rates across the 4-snippet human pool vs the 4-snippet Suno pool, and read both against Wong & Diehl's baseline.
 
 ## Dataset
 
-Three human/Suno pairs matched by tempo. Audio in `assignments/06-final-project/audio/`.
+**n = 8 chorus snippets** (4 human + 4 Suno-generated), all 10–14 syllables, drawn from the chorus of each track and matched by tempo. Audio in `final_project/audio/`.
 
-| Tempo    | Human (track, artist)              | Suno (generated, V5.5)              |
-| -------- | ---------------------------------- | ----------------------------------- |
-| Mid      | 隔離 — Jace Chan (2023)            | 玻璃                                  |
-| Ballad   | 高山低谷 — Phil Lam 林奕匡 (2014)  | 雨窗一封                                |
-| Uptempo  | 紅日 — Hacken Lee 李克勤 (1992)    | 旺角快車                               |
+| Tempo   | Human (track, artist, year)                                | Suno V5.5 (generated chorus)         |
+| ------- | ---------------------------------------------------------- | ------------------------------------ |
+| Mid     | 隔離 — Jace Chan (2023)                                    | 玻璃杯邊                              |
+| Ballad  | 高山低谷 — Phil Lam 林奕匡 (2014)                         | 雨窗                                  |
+| Ballad  | 在錯誤的宇宙尋找愛 — 陳健安 On Chan (2019)                | 平行失手                              |
+| Uptempo | 紅日 — Hacken Lee 李克勤 (1992)                           | 旺角快車                              |
 
+Snippet selection rules: chorus only, 10–14 syllables ending at a phrase boundary, no English loanwords, no proper nouns, citation tones cross-checked against Words.hk. Modern Cantopop register (literary 的, colloquial 嗎) is accepted on both sides.
 
 ## Files
 
-- `assignments/06-final-project/cantonese_tone_audit.py` — core framework: tone mapping, F0 extraction, violation counting
-- `assignments/06-final-project/audit_driver.py` — runs the audit across all 6 tracks, emits the comparison figure
-- `assignments/06-final-project/audio/` — 3 human + 3 Suno mp3s
-- `assignments/06-final-project/figures/human_vs_suno.png` — bar chart of match rate vs Wong & Diehl baseline
+- `final_project/cantonese_tone_audit.py` — core framework: tone mapping, F0 extraction, violation counting
+- `final_project/audit_driver.py` — runs the audit across all 8 snippets, emits the comparison figure
+- `final_project/audio/` — 4 human Cantopop tracks + 4 Suno-generated tracks (mp3 / wav)
+- `final_project/figures/human_vs_suno.png` — bar chart of pool means by tempo with within-pool spread, against the Wong & Diehl baseline
+- `final_project/video_plan.md` — script and production plan for the accompanying 3:30 video
 
 ## Run
 
 ```bash
 pip install praat-parselmouth librosa numpy pandas matplotlib
-cd assignments/06-final-project
+cd final_project
 python audit_driver.py
 ```
 
 Outputs:
-- `figures/human_vs_suno.png` — bar chart of match rate per tempo bucket vs the Wong & Diehl baseline band
+- `figures/human_vs_suno.png` — bar chart with pool means (n=4 each), individual snippet dots, and the Wong & Diehl baseline band
 - per-snippet expected-direction tables and pair-by-pair violation reports to stdout
 - top Suno violations grouped by track (b-roll material for the project video)
 
@@ -49,7 +52,13 @@ The CJK glyphs in matplotlib labels rely on a system CJK font (PingFang / Heiti 
 
 ## Findings
 
-See `figures/human_vs_suno.png` and the violation tables in the audit's stdout. Discussion and concrete failure pairs are walked through in the accompanying video.
+The audit's headline number is counterintuitive: **Suno's pool mean (~80%) lands inside Wong & Diehl's 75–92% baseline; the human pool mean (~74%) is just below it.** That is almost certainly *not* a real Suno advantage — it is an artifact of auto-segmentation interacting with vocal articulation:
+
+- Auto-segmentation is fragile. Moving the 玻璃杯邊 snippet boundary by **one second** swings its match rate by **18 points** (91% → 73%).
+- Suno vocals have crisper consonant attacks than legato Cantopop human singing, giving the segmentation algorithm cleaner unvoiced gaps to split on. Better F0 windows → higher apparent match rate.
+- The audit measures *direction-of-F0* only. It cannot hear timbre, lyrical depth, or whether a syllable's pitch contour is *natural* vs. *just-barely-correct-on-paper*.
+
+The real finding is in the gap between what the audit measures and what a native Cantonese ear catches: surface accuracy (genre, language, chorus structure) without literary depth, with occasional tone-fit failures that flip word identity (係 → 西). Discussion and concrete failure pairs are walked through in the accompanying video (see `final_project/video_plan.md`).
 
 ---
 
@@ -59,6 +68,7 @@ My personal work for NYU's *Music, Mind and Artificial Intelligence* course (Spr
 
 ## Contents
 
+- **`final_project/`** — Cantonese tone audit (see top of README for full writeup)
 - **`labs/`** — Lab notebooks
   - `01-python-basics` · `02-hello` · `03-leap-year` — warm-ups
   - `04-sine-wave` · `05-sine-square-saw` · `06-play-audio` — synthesis & playback
@@ -69,7 +79,6 @@ My personal work for NYU's *Music, Mind and Artificial Intelligence* course (Spr
   - `03-clustering` — clustering songs by audio features
   - `04-playlisting` — playlist generation
   - `05-project-2` — project 2
-  - `06-final-project` — final project (Cantonese tone audit, see top of README)
 - **`demos/`** — Side explorations (drum clustering, music21 analysis)
 - **`notes/`** — Personal study notes (sine-wave fundamentals)
 - **`misc/`** — Tempo-extraction tutorial I wrote up while reviewing for an assignment
