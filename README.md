@@ -29,8 +29,8 @@ Snippet selection rules: chorus only, 10–14 syllables ending at a phrase bound
 
 ## Files
 
-- `final_project/cantonese_tone_audit.py` — core framework: tone mapping, F0 extraction, violation counting
-- `final_project/audit_driver.py` — runs the audit across all 8 snippets, emits the comparison figure
+- `final_project/pipeline/cantonese_tone_audit.py` — core framework: tone mapping, F0 extraction, violation counting
+- `final_project/pipeline/audit_driver.py` — runs the audit across all 8 snippets, emits the comparison figure
 - `final_project/audio/` — 4 human Cantopop tracks + 4 Suno-generated tracks (mp3 / wav)
 - `final_project/figures/human_vs_suno.png` — bar chart of pool means by tempo with within-pool spread, against the Wong & Diehl baseline
 - `final_project/video_plan.md` — script and production plan for the accompanying 3:30 video
@@ -39,9 +39,11 @@ Snippet selection rules: chorus only, 10–14 syllables ending at a phrase bound
 
 ```bash
 pip install praat-parselmouth librosa numpy pandas matplotlib
-cd final_project
+cd final_project/pipeline
 python audit_driver.py
 ```
+
+The driver normalizes its working directory to `final_project/` on startup, so audio and figure paths resolve correctly regardless of where the script is invoked from.
 
 Outputs:
 - `figures/human_vs_suno.png` — bar chart with pool means (n=4 each), individual snippet dots, and the Wong & Diehl baseline band
