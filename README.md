@@ -21,7 +21,7 @@ Cantonese is a tonal language: the pitch direction between adjacent syllables ha
 | Tempo   | Human (track, artist, year)                                | Suno V5.5 (generated chorus)         |
 | ------- | ---------------------------------------------------------- | ------------------------------------ |
 | Mid     | 隔離 — Jace Chan (2023)                                    | 玻璃杯邊                              |
-| Ballad  | 高山低谷 — Phil Lam 林奕匡 (2014)                         | 雨窗                                  |
+| Ballad  | 高山低谷 — Phil Lam 林奕匡 (2014)                         | 雨窗一封                                 |
 | Ballad  | 在錯誤的宇宙尋找愛 — 陳健安 On Chan (2019)                | 平行失手                              |
 | Uptempo | 紅日 — Hacken Lee 李克勤 (1992)                           | 旺角快車                              |
 
