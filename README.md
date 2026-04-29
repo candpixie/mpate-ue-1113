@@ -3,6 +3,10 @@ by Candy Xie
 
 A tone-tune mapping audit comparing human-sung Cantopop against Suno-generated Cantopop to test whether AI music generation respects Cantonese's six-tone system.
 
+## Video (3:30)
+
+[![Does AI-Generated Cantopop Respect Cantonese Tone? — video walkthrough](final_project/figures/video_thumbnail.jpg)](https://youtu.be/GyHnrzyywV8)
+
 ## Question
 
 Cantonese is a tonal language: the pitch direction between adjacent syllables has to roughly match the lexical tonal direction, or the lyric becomes unintelligible — sing 係 (*hai6*, "is") with the pitch shape of 「西」 (*sai1*, vulgar, homophone used here) and a Cantonese listener hears a different word. Wong & Diehl (2002) showed human Cantopop respects this rule **75–92%** of the time. **Does Suno?**
@@ -33,7 +37,7 @@ Snippet selection rules: chorus only, 10–14 syllables ending at a phrase bound
 - `final_project/pipeline/audit_driver.py` — runs the audit across all 8 snippets, emits the comparison figure
 - `final_project/audio/` — 4 human Cantopop tracks + 4 Suno-generated tracks (mp3 / wav)
 - `final_project/figures/human_vs_suno.png` — bar chart of pool means by tempo with within-pool spread, against the Wong & Diehl baseline
-- `final_project/video_plan.md` — script and production plan for the accompanying 3:30 video
+- `final_project/figures/video_thumbnail.jpg` — poster frame for the video link at the top of the README
 
 ## Run
 
@@ -60,7 +64,7 @@ The audit's headline number is counterintuitive: **Suno's pool mean (~80%) lands
 - Suno vocals have crisper consonant attacks than legato Cantopop human singing, giving the segmentation algorithm cleaner unvoiced gaps to split on. Better F0 windows → higher apparent match rate.
 - The audit measures *direction-of-F0* only. It cannot hear timbre, lyrical depth, or whether a syllable's pitch contour is *natural* vs. *just-barely-correct-on-paper*.
 
-The real finding is in the gap between what the audit measures and what a native Cantonese ear catches: surface accuracy (genre, language, chorus structure) without literary depth, with occasional tone-fit failures that flip word identity (係 → 西). Discussion and concrete failure pairs are walked through in the accompanying video (see `final_project/video_plan.md`).
+The real finding is in the gap between what the audit measures and what a native Cantonese ear catches: surface accuracy (genre, language, chorus structure) without literary depth, with occasional tone-fit failures that flip word identity (係 → 西). Discussion and concrete failure pairs are walked through in the [accompanying video](#video-330).
 
 ---
 

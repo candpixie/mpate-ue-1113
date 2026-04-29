@@ -18,6 +18,9 @@ assignments/03-clustering/songs/
 assignments/04-playlisting/grind/
 assignments/04-playlisting/run/
 
+# Video master (too large for GitHub; published to YouTube instead)
+*.mov
+
 # Editor / OS / agent state
 .vscode/
 .idea/
