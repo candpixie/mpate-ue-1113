@@ -9,7 +9,7 @@ A tone-tune mapping audit comparing human-sung Cantopop against Suno-generated C
 
 ## Question
 
-Cantonese is a tonal language: the pitch direction between adjacent syllables has to roughly match the lexical tonal direction, or the lyric becomes unintelligible where a Cantonese listener might hear a completely different word, potentially resulting in misunderstanding. Wong & Diehl (2002) showed human Cantopop respects this rule **75–92%** of the time. **Does Suno?**
+Cantonese is a tonal language: the pitch direction between adjacent syllables has to roughly match the lexical tonal direction, or the lyric becomes unintelligible where a Cantonese listener might hear a completely different word, potentially resulting in misunderstanding. Wong & Diehl (2002) found that approximately 92% of tonal bigrams in Cantopop conform to a directional matching constraint. **Does Suno?**
 
 ## Method
 
